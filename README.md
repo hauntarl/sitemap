@@ -8,42 +8,49 @@ Implementation of Sitemap Builder from gophercises, including the bonus section.
 
 **[Gophercises](https://courses.calhoun.io/courses/cor_gophercises)**  by Jon Calhoun
 
-<!--
 **Run Commands:**
 
-- go run examples\ex1\main.go
-- go run examples\ex2\main.go
-- go run examples\ex3\main.go
-- go run examples\ex4\main.go
+- go run main.go --help (-h)
+- go run main.go
+- go run main.go --depth ```int``` (-depth=```int```)
 
 **Features:**
 
-- creating io.Reader from string type
-- using depth first search to traverse html document
-- extracting relevant information from html document
+- performing http.Get request for given urls and parsing the documents
+- using bread-first traversal on child hrefs to generate a sitemap
+- encoding generated sitemap into xml format
 
 **Packages explored:**
 
-- fmt
-- strings - to create io.Reader and format relevant data
-- [golang.org/x/net/html](golang.org/x/net/html) - to parse the html document into Tree structure
+- encoding/xml - to encode go data structure into xml format
+- flag - to get depth of search and root url
+- net/http - to perform GET request on urls
+- net/url - to segregate raw urls into accessible data structure
+- os - to create new file and store encoded results into
+- strings - to check for prefixes in the parsed links
+- [github.com/hauntarl/link-parser](github.com/hauntarl/link-parser) - to parse the HTML document and extract all hrefs from it
 
 **Output:**
 
 ``` terminal
-D:\gophercises\link-parser>go run examples\ex1\main.go
-/other-page                                       : A link to another page some span
-/page-two                                         : A link to second page
+D:\gophercises\sitemap>go run main.go --help
+Usage of C:\Users\hauntarl\AppData\Local\Temp\go-build2610664103\b001\exe\main.exe:
+  -depth int
+        the maximum depth of links to follow when building a sitemap (default -1)
+  -url string
+        the url that you want to build a sitemap for (default "https://gophercises.com")
 
-D:\gophercises\link-parser>go run examples\ex2\main.go
-https://www.twitter.com/joncalhoun                : Check me out on twitter
-https://github.com/gophercises                    : Gophercises is on Github!
-
-D:\gophercises\link-parser>go run examples\ex3\main.go
-#                                                 : Login
-/lost                                             : Lost? Need help?
-https://twitter.com/marcusolsson                  : @marcusolsson
-
-D:\gophercises\link-parser>go run examples\ex4\main.go
-/dog-cat                                          : dog cat
+D:\gophercises\sitemap>go run main.go -depth=2
+gophercises.com.xml:
+<urlset>
+  <url>
+    <loc>https://gophercises.com</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com/</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com/demos/cyoa/</loc>
+  </url>
+</urlset>
 ```
