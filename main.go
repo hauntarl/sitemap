@@ -43,7 +43,7 @@ func main() {
 		seen = map[string]struct{}{}
 		que  = []string{*root}
 	)
-	for *depth != 0 && len(que) != 0 {
+	for *depth > -1 && len(que) != 0 {
 		que = traverse(que, seen)
 		*depth--
 	}

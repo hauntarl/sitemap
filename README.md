@@ -44,6 +44,9 @@ D:\gophercises\sitemap>go run main.go -depth=2
 gophercises.com.xml:
 <urlset>
   <url>
+    <loc>https://gophercises.com/demos/cyoa/denver</loc>
+  </url>
+  <url>
     <loc>https://gophercises.com</loc>
   </url>
   <url>
@@ -51,6 +54,9 @@ gophercises.com.xml:
   </url>
   <url>
     <loc>https://gophercises.com/demos/cyoa/</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com/demos/cyoa/new-york</loc>
   </url>
 </urlset>
 ```
