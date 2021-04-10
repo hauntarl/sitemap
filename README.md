@@ -34,18 +34,16 @@ Implementation of Sitemap Builder from gophercises, including the bonus section.
 
 ``` terminal
 D:\gophercises\sitemap>go run main.go --help
-Usage of C:\Users\hauntarl\AppData\Local\Temp\go-build2610664103\b001\exe\main.exe:
+Usage of C:\Users\hauntarl\AppData\Local\Temp\go-build3946356141\b001\exe\main.exe:
   -depth int
-        the maximum depth of links to follow when building a sitemap (default -1)
+        the maximum depth of links to follow when building a sitemap (default 127)
   -url string
         the url that you want to build a sitemap for (default "https://gophercises.com")
 
 D:\gophercises\sitemap>go run main.go -depth=2
 gophercises.com.xml:
-<urlset>
-  <url>
-    <loc>https://gophercises.com/demos/cyoa/denver</loc>
-  </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gophercises.com</loc>
   </url>
@@ -57,6 +55,9 @@ gophercises.com.xml:
   </url>
   <url>
     <loc>https://gophercises.com/demos/cyoa/new-york</loc>
+  </url>
+  <url>
+    <loc>https://gophercises.com/demos/cyoa/denver</loc>
   </url>
 </urlset>
 ```

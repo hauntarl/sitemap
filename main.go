@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"flag"
 	"io"
+	"math"
 	"net/http"
 	"net/url"
 	"os"
@@ -11,6 +12,8 @@ import (
 
 	"github.com/hauntarl/link-parser"
 )
+
+const xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 var (
 	root  *string
@@ -23,7 +26,7 @@ func init() {
 		"the url that you want to build a sitemap for",
 	)
 	depth = flag.Int(
-		"depth", -1,
+		"depth", math.MaxInt8,
 		"the maximum depth of links to follow when building a sitemap",
 	)
 	flag.Parse()
@@ -34,7 +37,8 @@ type (
 		Value string `xml:"loc"`
 	}
 	urlset struct {
-		Urls []loc `xml:"url"`
+		Urls  []loc  `xml:"url"`
+		Xmlns string `xml:"xmlns,attr"`
 	}
 )
 
@@ -43,12 +47,12 @@ func main() {
 		seen = map[string]struct{}{}
 		que  = []string{*root}
 	)
-	for *depth > -1 && len(que) != 0 {
+	for *depth >= 0 && len(que) != 0 {
 		que = traverse(que, seen)
 		*depth--
 	}
 
-	data := urlset{make([]loc, 0, len(seen))}
+	data := urlset{make([]loc, 0, len(seen)), xmlns}
 	for page := range seen {
 		data.Urls = append(data.Urls, loc{page})
 	}
@@ -59,6 +63,7 @@ func main() {
 	}
 	defer file.Close()
 
+	file.WriteString(xml.Header)
 	enc := xml.NewEncoder(file)
 	enc.Indent("", "  ")
 	if err := enc.Encode(data); err != nil {
