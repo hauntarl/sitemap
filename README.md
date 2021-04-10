@@ -28,7 +28,7 @@ Implementation of Sitemap Builder from gophercises, including the bonus section.
 - net/url - to access specific parts of a request url
 - os - to create new file and store encoded results into
 - strings - to check for prefixes in the parsed links
-- [github.com/hauntarl/link-parser](github.com/hauntarl/link-parser) - to parse the HTML document and extract all hrefs from it
+- [github.com/hauntarl/link-parser](https://github.com/hauntarl/link-parser) - to parse the HTML document and extract all hrefs from it
 
 **Output:**
 
