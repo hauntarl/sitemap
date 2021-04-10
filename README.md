@@ -25,7 +25,7 @@ Implementation of Sitemap Builder from gophercises, including the bonus section.
 - encoding/xml - to encode go data structure into xml format
 - flag - to get depth of search and root url
 - net/http - to perform GET request on urls
-- net/url - to segregate raw urls into accessible data structure
+- net/url - to access parts specific parts of request url
 - os - to create new file and store encoded results into
 - strings - to check for prefixes in the parsed links
 - [github.com/hauntarl/link-parser](github.com/hauntarl/link-parser) - to parse the HTML document and extract all hrefs from it
